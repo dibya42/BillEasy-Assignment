@@ -5,5 +5,5 @@ const triggerTable = " INSERT INTO employee (id, name, address, join_time) VALUE
 
 module.exports = {
     getEmployees, getEmployeesById,
-     getEmployeesByTheirIdWithDeparment,createEmplyTable, triggerTable
+     createEmplyTable, triggerTable
 }

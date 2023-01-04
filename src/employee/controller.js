@@ -36,5 +36,5 @@ const triggerTable =  (req, res)=>{
 
 module.exports ={
     getEmployees, getEmployeesById,
-    getEmployeesByTheirIdWithDeparment,createEmplyTable, triggerTable
+    createEmplyTable, triggerTable
 }
