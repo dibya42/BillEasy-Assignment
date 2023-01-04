@@ -1,8 +1,9 @@
-const getEmployees = "SELECT * FROM employee";
-const getEmployeesById = "SELECT * FROM employee WHERE id = $1";
-const  getEmployeesByTheirIdWithDeparment = "SELECT * FROM employee JOIN deparment WHERE id = $1";
-const checkNoExists = "SELECT s FROM employee s WHERE s.mobile_no = $1";
-const createEmplyTable = "INSERT INTO employee (name, address, join_date) VALUES ($1,$2)";
+const getEmployees = " SELECT * FROM employee FULL OUTER JOIN department ON employee.id = department.emp_id;";
+const getEmployeesById = " SELECT * FROM employee LEFT JOIN department ON employee.id = department.emp_id WHERE employee.id = $1";
+const createEmplyTable = "INSERT INTO employee (id, name, address, join_time) VALUES ($1, $2, $3, $4)";
+const triggerTable = " INSERT INTO employee (id, name, address, join_time) VALUES ($1, $2, $3, $4) CREATE OR REPLACE FUNCTION calc_count() return trigger as $$ declare count numeric; begin count = new.id+1; new.total_emp = count; return new; end;$$ language plpgsql; create trigger cal_total_emp after insert  on department for each row excute procedure cal_total_emp();" 
+
 module.exports = {
-    getEmployees, getEmployeesById,checkNoExists, getEmployeesByTheirIdWithDeparment,createEmplyTable
+    getEmployees, getEmployeesById,
+     getEmployeesByTheirIdWithDeparment,createEmplyTable, triggerTable
 }

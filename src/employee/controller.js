@@ -16,21 +16,25 @@ const getEmployeesById = (req, res)=>{
     })
 }
 
-const getEmployeesByTheirIdWithDeparment = (req, res)=>{
-    const id = parseInt(req.params.id);
-    pool.query(queries.getEmployeesByTheirIdWithDeparment, [id], (error, results)=>{
+const createEmplyTable = (req,res)=>{
+    const {id,name, address, join_time} = req.body;
+    pool.query(queries.createEmplyTable, [id, name, address, join_time], (error, results)=>{
         if(error) throw error;
-        res.status(200).json(results.rows);
+        res.status(201).send("Employee inserted");
+
     })
 };
 
-const createEmplyTable = (req,res)=>{
-    const {name, address, join_time} = req.body
-            if(error) throw error;
-            res.status(201).send("Employee inserted");
+const triggerTable =  (req, res)=>{
+    const {id,name, address, join_time} = req.body;
+    pool.query(queries.createEmplyTable, [id, name, address, join_time], (error, results)=>{
+        if(error) throw error;
+        res.status(201).send("Employee inserted");
 
-};
+    })
+}
 
 module.exports ={
-    getEmployees, getEmployeesById,getEmployeesByTheirIdWithDeparment,createEmplyTable
+    getEmployees, getEmployeesById,
+    getEmployeesByTheirIdWithDeparment,createEmplyTable, triggerTable
 }
